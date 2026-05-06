@@ -111,7 +111,7 @@ makeNetworks <- function(
     tag <- ifelse(!is.null(label), paste0("[", label, "] "), "")
     cli::cli_alert_info("{tag}Building {nNet} gene regulatory networks")
     cli::cli_inform("PCNet - Principal Component Network Analysis")
-    cli::cli_inform("Input: {nrow(xList[[1]])} samples x {nGenes} genes")
+    cli::cli_inform("Input: {ncol(xList[[1]])} samples x {nGenes} genes")
     cli::cli_inform("Parameters: nComp={nComp}, nCores={nCores}, q={q}")
     id <- cli::cli_progress_bar(paste0(tag, "Networks"), total = nNet)
   }
