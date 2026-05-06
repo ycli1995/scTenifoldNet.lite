@@ -220,7 +220,7 @@ scTenifoldKnk <- function(
   KO <- WT
   KO[gKO, ] <- 0
   if (verbose) {
-    cli::cli_alert_success("Simulated knockout for {gKO}")
+    cli::cli_alert_success("Simulated knockout for {gKO2}")
   }
 
   # Align WT and KO networks into a shared low-dimensional manifold space
@@ -238,7 +238,7 @@ scTenifoldKnk <- function(
 
   DR <- dRegulation(manifoldOutput = MA, gKO = gKO, verbose = verbose)
   if (verbose) {
-    cli::cli_alert_success("Differential regulation computed for {gKO}")
+    cli::cli_alert_success("Differential regulation computed for {gKO2}")
   }
 
   # Prepare and return results
@@ -249,7 +249,7 @@ scTenifoldKnk <- function(
   outputList$diffRegulation <- DR
   # Finish CLI process and return results
   if (verbose) {
-    cli::cli_alert_success("Finished scTenifoldKnk for {gKO}")
+    cli::cli_alert_success("Finished scTenifoldKnk for {gKO2}")
   }
   return(outputList)
 }
