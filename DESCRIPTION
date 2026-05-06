@@ -1,0 +1,36 @@
+Package: scTenifoldNet.lite
+Type: Package
+Title: Lightweight and Accelerated Gene Regulatory Network Comparison for 
+    Single-Cell Transcriptomics
+Version: 0.1.0
+Authors@R: person(
+    given = "Yuchen", family = "Li", 
+    email = "ycli1995@outlook.com", 
+    role = c("aut", "cre"))
+Description: Fast and memory-efficient implementation of the scTenifoldNet 
+    workflow for constructing and comparing single-cell gene regulatory 
+    networks. The computational performance for principal component regression, 
+    tensor decomposition, and manifold alignment was optimized, while preserving 
+    the core analytical framework of the original scTenifoldNet method. 
+Depends: 
+    methods
+LinkingTo: 
+    Rcpp,
+    RcppEigen
+Imports: 
+    cli,
+    collapse,
+    MASS,
+    Matrix,
+    Rcpp,
+    RhpcBLASctl,
+    RSpectra
+Suggests: 
+    SeuratObject,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
