@@ -162,14 +162,6 @@ scTenifoldNet <- function(
     cli::cli_alert_info("Step 3/6: Building gene regulatory networks")
   }
   nc_nCellsX <- nc_nCellsY <- nc_nCells
-  if (fast) {
-    warning(
-      "Using `fast = TRUE`. nCells for down sampling must > 75% total cells",
-      immediate. = TRUE, call. = FALSE
-    )
-    nc_nCellsX <- max(nc_nCellsX, floor(0.75 * ncol(X)))
-    nc_nCellsY <- max(nc_nCellsY, floor(0.75 * ncol(Y)))
-  }
   if (verbose) {
     cli::cli_alert_info(
       "Down sample {nc_nNet} expression matrices with {nc_nCells} cells"
