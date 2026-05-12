@@ -113,6 +113,9 @@ makeNetworks <- function(
     cli::cli_inform("PCNet - Principal Component Network Analysis")
     cli::cli_inform("Input: {ncol(xList[[1]])} samples x {nGenes} genes")
     cli::cli_inform("Parameters: nComp={nComp}, nCores={nCores}, q={q}")
+    if (fast) {
+      cli::cli_inform("Using `fast = TRUE`")
+    }
     id <- cli::cli_progress_bar(paste0(tag, "Networks"), total = nNet)
   }
   networks <- list()

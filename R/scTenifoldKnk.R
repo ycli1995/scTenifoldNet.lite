@@ -152,13 +152,6 @@ scTenifoldKnk <- function(
   }
 
   # Get subsample of X
-  if (fast) {
-    warning(
-      "Using `fast = TRUE`. nCells for down sampling must > 75% total cells",
-      immediate. = TRUE, call. = FALSE
-    )
-    nc_nCells <- max(nc_nCells, floor(0.75 * ncol(countMatrix)))
-  }
   if (verbose) {
     cli::cli_alert_info(
       "Down sample {nc_nNet} expression matrices with {nc_nCells} cells"
@@ -219,6 +212,9 @@ scTenifoldKnk <- function(
   # Simulate knockout by zeroing outgoing edges from the KO gene
   KO <- WT
   KO[gKO, ] <- 0
+  if (all(KO[gKO, ] == WT[gKO, ])) {
+    stop("The WT[gKO, ] is already 0. Cannot simulate knockout for ", gKO2)
+  }
   if (verbose) {
     cli::cli_alert_success("Simulated knockout for {gKO2}")
   }
