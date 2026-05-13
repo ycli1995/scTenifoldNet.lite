@@ -163,6 +163,11 @@ scTenifoldKnk <- function(
     nCells = nc_nCells,
     seed = seed
   )
+  newGenes <- rownames(xList[[1]])
+  if (any(!gKO %in% newGenes)) {
+    gKO <- paste(setdiff(gKO, newGenes), collapse = ", ")
+    stop("`gKO` were removed due to low expression: ", gKO)
+  }
 
   # Build an ensemble of gene regulatory networks (subsample cells, use PCR)
   WT <- makeNetworks(

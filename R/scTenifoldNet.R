@@ -179,6 +179,17 @@ scTenifoldNet <- function(
     nCells = nc_nCellsY,
     seed = seed
   )
+  sharedGenes <- intersect(rownames(xList[[1]]), rownames(yList[[1]]))
+  nGenes <- length(sharedGenes)
+  if (verbose) {
+    cli::cli_alert_info("Shared genes: {nGenes}")
+  }
+  for (i in seq_along(xList)) {
+    xList[[i]] <- xList[[i]][sharedGenes, , drop = FALSE]
+  }
+  for (i in seq_along(yList)) {
+    yList[[i]] <- yList[[i]][sharedGenes, , drop = FALSE]
+  }
   xList <- makeNetworks(
     xList = xList,
     nComp = nc_nComp,

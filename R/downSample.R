@@ -15,12 +15,19 @@ get_down_sample_matrices <- function(X, N = 10, nCells = 500, seed = 42) {
     }
     n <- 1
     mat <- X[, sample(seq_len(ncol(X)), size = nCells), drop = FALSE]
-    while (!all(Matrix::rowSums(mat) > 0)) {
-      n <- n + 1
-      set.seed(sub.seeds[i] * n)
-      mat <- X[, sample(seq_len(ncol(X)), size = nCells), drop = FALSE]
-    }
-    xList[[i]] <- mat
+    xList[[i]] <- mat[Matrix::rowSums(mat) > 0, , drop = FALSE]
+  }
+  commonGenes <- Reduce(intersect, lapply(xList, rownames))
+  oldGenes <- rownames(X)
+  if (!all(oldGenes %in% commonGenes)) {
+    removedGenes <- paste(setdiff(oldGenes, commonGenes), collapse = ", ")
+    warning(
+      "Genes were removed due to low expression: \n", removedGenes,
+      immediate. = TRUE, call. = FALSE
+    )
+  }
+  for (i in seq_along(xList)) {
+    xList[[i]] <- xList[[i]][commonGenes, , drop = FALSE]
   }
   xList
 }
