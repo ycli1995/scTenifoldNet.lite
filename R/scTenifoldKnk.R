@@ -146,11 +146,11 @@ scTenifoldKnk <- function(
       "retained {nrow(countMatrix)} genes and {ncol(countMatrix)} cells"
     ))
   }
-  .check_gKO(countMatrix, gKO)
   if (any(!gKO %in% rownames(countMatrix))) {
     gKO <- paste(setdiff(gKO, rownames(countMatrix)), collapse = ", ")
     stop("The following `gKO` not found in `countMatrix`: ", gKO)
   }
+  .check_gKO(countMatrix, gKO)
 
   # Get subsample of X
   if (verbose) {
