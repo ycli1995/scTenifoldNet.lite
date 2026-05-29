@@ -146,6 +146,7 @@ scTenifoldKnk <- function(
       "retained {nrow(countMatrix)} genes and {ncol(countMatrix)} cells"
     ))
   }
+  .check_gKO(countMatrix, gKO)
   if (any(!gKO %in% rownames(countMatrix))) {
     gKO <- paste(setdiff(gKO, rownames(countMatrix)), collapse = ", ")
     stop("The following `gKO` not found in `countMatrix`: ", gKO)
@@ -253,4 +254,13 @@ scTenifoldKnk <- function(
     cli::cli_alert_success("Finished scTenifoldKnk for {gKO2}")
   }
   return(outputList)
+}
+
+.check_gKO <- function(mat, gKO) {
+  nCells <- Matrix::rowSums(mat[gKO, , drop = FALSE] > 0)
+  if (any(nCells < 5)) {
+    gKO <- paste(gKO[nCells < 5], collapse = ", ")
+    stop("The following `gKO` expressed in < 5 cells: ", gKO)
+  }
+  invisible(NULL)
 }
