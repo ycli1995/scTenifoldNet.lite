@@ -220,7 +220,7 @@ scTenifoldOE <- function(
 
   # Simulate overexpression by zeroing outgoing edges from the OE gene
   OE <- WT
-  OE[gOE, ] <- OE[gOE, ] * 10
+  OE[gOE, ] <- OE[gOE, ] * fold_change
   if (all(OE[gOE, ] == WT[gOE, ])) {
     stop("The WT[gOE, ] is already 0. Cannot simulate overexpression for ", gOE2)
   }
