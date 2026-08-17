@@ -1,7 +1,11 @@
 
 get_down_sample_matrices <- function(X, N = 10, nCells = 500, seed = 42) {
   if (nCells > 0.9 * ncol(X)) {
-    stop("`nCells` (", nCells, ") > 90% of total cells (", ncol(X), ")")
+    warning(
+      "`nCells` (", nCells, ") > 90% of total cells (", ncol(X), ")", 
+      immediate. = TRUE, call. = FALSE
+    )
+    nCells <- 0.9 * ncol(X)
   }
   sub.seeds <- NULL
   if (length(seed) > 0) {
